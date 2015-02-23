@@ -10,7 +10,7 @@ FFPROBE_PATH="/usr/local/bin/ffprobe"
 COMMAND=$(cat <<EOF
 export DEBIAN_FRONTEND=noninteractive
 if [ ! -x $FFMPEG_PATH ]; then
-    sudo apt-get install -y libmp3lame-dev libass-dev
+    apt-get install -y libmp3lame-dev libass-dev
     wget --quiet -O $FFMPEG_PATH https://github.com/mattcodez/dokku-ffmpeg/raw/master/binaries/ffmpeg
     chmod +x $FFMPEG_PATH
     echo "       Injected ffmpeg"
