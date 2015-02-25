@@ -25,14 +25,19 @@ if [ ! -x $FFMPEG_PATH ]; then
 	 
 	 wget --quiet -O $X264H_PATH https://github.com/mattcodez/dokku-ffmpeg/raw/master/binaries/x264.h
 	 chmod 644 $X264H_PATH
+	 echo "       Injected x264.h"
 	 wget --quiet -O $X264CONFIG_PATH https://github.com/mattcodez/dokku-ffmpeg/raw/master/binaries/x264_config.h
 	 chmod 644 $X264CONFIG_PATH
-	 wget --quiet -O $X264PC_PATH https://github.com/mattcodez/dokku-ffmpeg/raw/master/binaries/x264.pc
-	 chmod 644 $X264PC_PATH
+	 echo "       Injected x264_config.h"
+	 #wget --quiet -O $X264PC_PATH https://github.com/mattcodez/dokku-ffmpeg/raw/master/binaries/x264.pc
+	 #chmod 644 $X264PC_PATH
+	 #echo "       Injected x264.pc"
 	 wget --quiet -O $LIBX264SO_PATH https://github.com/mattcodez/dokku-ffmpeg/raw/master/binaries/libx264.so
 	 chmod 755 $LIBX264SO_PATH
+	 echo "       Injected libx264.so"
 	 wget --quiet -O $LIBX264A_PATH https://github.com/mattcodez/dokku-ffmpeg/raw/master/binaries/libx264.a
 	 chmod 644 $LIBX264A_PATH
+	 echo "       Injected libx264.a"
 fi
 sleep 1 # wait so that docker run has not exited before docker attach
 EOF
