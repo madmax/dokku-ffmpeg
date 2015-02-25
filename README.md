@@ -1,5 +1,8 @@
 # dokku-ffmpeg
 
+## TODO
+Couldn't we just copy the binaries straight from the folder on disk rather than using wget?
+
 Install ffmpeg into a dokku container.
 Points to an ffmpeg build created for ubuntu using this guide https://trac.ffmpeg.org/wiki/CompilationGuide/Ubuntu.
 
