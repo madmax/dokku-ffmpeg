@@ -18,12 +18,12 @@ export DEBIAN_FRONTEND=noninteractive
 if [ ! -x $FFMPEG_PATH ]; then
     apt-get install -y libmp3lame-dev libass-dev libx264-dev
     wget --quiet -O $FFMPEG_PATH https://github.com/mattcodez/dokku-ffmpeg/raw/master/binaries/ffmpeg
-    chmod +x $FFMPEG_PATH
+    chmod 755 $FFMPEG_PATH
     echo "       Injected ffmpeg"
     wget --quiet -O $FFPROBE_PATH https://github.com/mattcodez/dokku-ffmpeg/raw/master/binaries/ffprobe
-    chmod +x $FFPROBE_PATH
+    chmod 755 $FFPROBE_PATH
     echo "       Injected ffprobe"
-    
+
     wget --quiet -O $X264_PATH https://github.com/mattcodez/dokku-ffmpeg/raw/master/binaries/x264
     chmod 755 $X264_PATH
     echo "       Injected x264"
