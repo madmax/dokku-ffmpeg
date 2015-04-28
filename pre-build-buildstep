@@ -1,0 +1,22 @@
+#!/bin/bash -e
+set -e
+
+APP="$1"; IMAGE="dokku/$APP"
+echo "-----> Injecting ffmpeg ..."
+
+FFMPEG_URL="http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz"
+CACHE_DIR="$DOKKU_ROOT/$APP/cache"
+
+COMMAND=$(cat <<EOF
+mkdir -p \$CACHE_PATH/ffmpeg/bin
+wget -qO \$CACHE_PATH/ffmpeg/ffmpeg.tar.xz $FFMPEG_URL
+tar --strip-components 1 -C \$CACHE_PATH/ffmpeg/bin -Jxf /cache/ffmpeg/ffmpeg.tar.xz
+cp \$CACHE_PATH/ffmpeg/bin/ffmpeg /usr/local/bin/
+sleep 1 # wait so that docker run has not exited before docker attach
+EOF
+)
+echo "docker run -d -v $CACHE_DIR:/cache -e CACHE_PATH=/cache $DOCKER_ARGS $IMAGE /bin/bash -e -c \"$COMMAND\""
+ID=$(docker run -d -v $CACHE_DIR:/cache -e CACHE_PATH=/cache $DOCKER_ARGS $IMAGE /bin/bash -e -c "$COMMAND")
+docker attach $ID
+test $(docker wait $ID) -eq 0
+docker commit $ID $IMAGE > /dev/null
